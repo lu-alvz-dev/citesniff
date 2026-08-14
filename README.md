@@ -30,7 +30,7 @@ CiteSniff is designed to address this problem by making source traceability a co
 
 CiteSniff follows an evidence-first workflow:
 
-````text
+```text
 User Text
     ↓
 Claim and Concept Detection
@@ -48,8 +48,7 @@ Exact Quotation
 APA 7 Citation
     ↓
 APA 7 Reference
-
-
+```
 
 If reliable evidence cannot be verified, CiteSniff should return a clear indication that sufficient evidence was not found instead of generating an unsupported quotation or citation.
 
@@ -180,7 +179,7 @@ CiteSniff separates the HTTP layer from the application and domain logic.
 │                 Data Layer                   │
 │            PostgreSQL + pgvector             │
 └──────────────────────────────────────────────┘
-
+```
 
 Long-running document processing will be separated from the HTTP request lifecycle as the application evolves.
 
@@ -210,7 +209,7 @@ CiteSniff/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-
+```
 
 ## Development
 
@@ -228,7 +227,7 @@ Clone the repository:
 git clone <repository-url>
 cd CiteSniff
 npm install
-
+```
 
 Development commands will be added as the frontend and backend applications are initialized.
 
@@ -285,7 +284,7 @@ The project is being built incrementally, with each development stage documented
 
 ### Phase 1 — Foundation
 
-- [ ] Repository initialization
+- [ ✔] Repository initialization
 - [ ] Frontend initialization
 - [ ] Backend initialization
 - [ ] Development tooling
@@ -345,6 +344,7 @@ The project is being built incrementally, with each development stage documented
 This project is licensed under the MIT License.
 
 ---
+
 ## Creator
+
 Luis Alvarez
-````
