@@ -95,3 +95,15 @@ This traceability requirement will influence the architecture throughout the pro
 ## Next Steps
 
 The next development stage will initialize the frontend and backend applications and establish their development tooling.
+
+## Frontend Initialization
+
+The frontend was initialized using the official React and TypeScript Vite template.
+
+The generated ESLint configuration was reviewed and intentionally preserved because it already provides a modern ESLint 10 flat configuration compatible with the selected React and TypeScript stack.
+
+The default Vite demonstration assets and UI were removed to establish a clean CiteSniff application boundary.
+
+No additional frontend tooling was introduced at this stage.
+
+The project will add formatting, testing, and styling tools incrementally so that each dependency has a clearly defined responsibility.
