@@ -110,9 +110,17 @@ The initial quotation requirements are:
 
 ### Frontend
 
+#### Current
+
 - React
 - Vite
 - TypeScript
+- ESLint
+- Prettier
+- Vitest
+
+#### Planned
+
 - Tailwind CSS
 - TanStack Query
 - React Hook Form
@@ -121,11 +129,15 @@ The initial quotation requirements are:
 
 ### Backend
 
+#### Planned
+
 - Node.js
 - Express
 - TypeScript
 
 ### Document Processing
+
+#### Planned
 
 - pdfjs-dist
 - Mozilla Readability
@@ -133,10 +145,14 @@ The initial quotation requirements are:
 
 ### Data
 
+#### Planned
+
 - PostgreSQL
 - pgvector
 
 ### AI and Retrieval
+
+#### Planned
 
 - Transformers.js
 - Vector embeddings
@@ -193,7 +209,15 @@ CiteSniff/
 ├── client/
 │   ├── .env.example
 │   ├── package.json
-│   └── src/
+│   ├── src/
+│   │   └── domain/
+│   │       └── evidence/
+│   │           └── verifyQuote.ts
+│   ├── tests/
+│   │   └── unit/
+│   │       └── evidence/
+│   │           └── verifyQuote.test.ts
+│   └── ...
 │
 ├── server/
 │   ├── .env.example
@@ -207,6 +231,7 @@ CiteSniff/
 │   └── product/
 │
 ├── .gitignore
+├── .gitattributes
 ├── LICENSE
 └── README.md
 ```
@@ -226,10 +251,83 @@ Clone the repository:
 ```bash
 git clone <repository-url>
 cd CiteSniff
+```
+
+CiteSniff is organized as two independent applications. Each application manages its own dependencies and development scripts.
+
+Install frontend dependencies:
+
+```bash
+cd client
 npm install
 ```
 
-Development commands will be added as the frontend and backend applications are initialized.
+Install backend dependencies:
+
+```bash
+cd ../server
+npm install
+```
+
+### Frontend Development
+
+Available Frontend development commands currently include:
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run format
+npm run format:check
+npm run test
+```
+
+## Testing
+
+CiteSniff uses automated tests to protect important domain behavior.
+
+The current frontend test suite uses Vitest.
+
+Run tests with:
+
+```bash
+cd client
+npm run test
+```
+
+### Code Quality
+
+The frontend uses ESLint and Prettier to maintain consistent code quality and formatting.
+
+Run linting:
+
+```bash
+cd client
+npm run lint
+```
+
+Format the code:
+
+```bash
+cd client
+npm run format
+```
+
+Verify formatting:
+
+```bash
+cd client
+npm run format:check
+```
+
+Production build verification:
+
+```bash
+cd client
+npm run build
+```
+
+The project uses .gitattributes to normalize text-file handling across development environments.
 
 ---
 
@@ -276,6 +374,19 @@ CiteSniff is developed around the following principles:
 
 CiteSniff is currently under active development.
 
+The repository foundation and frontend application have been initialized.
+
+Current development work includes:
+
+Frontend foundation.
+Development tooling.
+Code formatting.
+Linting.
+Automated testing.
+Initial evidence-verification domain logic.
+
+The backend has not yet been initialized.
+
 The project is being built incrementally, with each development stage documented through technical decisions, implementation notes, tests, and Git commits.
 
 ---
@@ -284,10 +395,14 @@ The project is being built incrementally, with each development stage documented
 
 ### Phase 1 — Foundation
 
-- [ ✔] Repository initialization
-- [ ] Frontend initialization
+- [✔] Repository initialization
+- [✔] Frontend initialization
+- [✔] Frontend development tooling
+- [✔] Code formatting
+- [✔] Frontend testing infrastructure
+- [✔] Initial evidence verification logic
 - [ ] Backend initialization
-- [ ] Development tooling
+- [ ] Backend Development tooling
 - [ ] Architecture documentation
 
 ### Phase 2 — Source Processing
