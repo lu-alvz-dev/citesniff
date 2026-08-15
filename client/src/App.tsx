@@ -4,7 +4,7 @@ function App() {
       <h1>CiteSniff</h1>
       <p>Follow the evidence.</p>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App
