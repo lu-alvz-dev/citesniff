@@ -393,7 +393,7 @@ The project is being built incrementally, with each development stage documented
 
 ## Roadmap
 
-### Phase 1 — Foundation
+### Foundation
 
 - [✔] Repository initialization
 - [✔] Frontend initialization
@@ -405,7 +405,7 @@ The project is being built incrementally, with each development stage documented
 - [ ] Backend Development tooling
 - [ ] Architecture documentation
 
-### Phase 2 — Source Processing
+### Source Processing
 
 - [ ] PDF upload
 - [ ] PDF text extraction
@@ -413,7 +413,7 @@ The project is being built incrementally, with each development stage documented
 - [ ] Website extraction
 - [ ] Source metadata
 
-### Phase 3 — Evidence Retrieval
+### Evidence Retrieval
 
 - [ ] Text chunking
 - [ ] Embeddings
@@ -421,21 +421,21 @@ The project is being built incrementally, with each development stage documented
 - [ ] Candidate retrieval
 - [ ] Evidence ranking
 
-### Phase 4 — Verification
+### Verification
 
 - [ ] Exact quotation verification
 - [ ] Quote length validation
 - [ ] Source traceability
 - [ ] Evidence confidence
 
-### Phase 5 — APA 7
+### APA 7
 
 - [ ] Parenthetical citation generation
 - [ ] Reference generation
 - [ ] PDF page support
 - [ ] Website citation support
 
-### Phase 6 — Application
+### Application
 
 - [ ] User interface
 - [ ] Source upload
@@ -443,7 +443,7 @@ The project is being built incrementally, with each development stage documented
 - [ ] Evidence results
 - [ ] Error states
 
-### Phase 7 — Production
+### Production
 
 - [ ] Authentication
 - [ ] Database persistence
