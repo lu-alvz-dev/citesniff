@@ -37,7 +37,7 @@ ESLint   → code quality
 Prettier → code formatting
 ```
 
-## Rationale
+## Reason
 
 This approach gives each tool a clear responsibility.
 
