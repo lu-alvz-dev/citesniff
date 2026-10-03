@@ -129,11 +129,12 @@ The initial quotation requirements are:
 
 ### Backend
 
-#### Planned
+#### Current
 
 - Node.js
 - Express
 - TypeScript
+- tsx
 
 ### Document Processing
 
@@ -282,6 +283,31 @@ npm run format:check
 npm run test
 ```
 
+### Backend Development
+
+Available Backend development commands currently include:
+
+```bash
+npm run dev
+npm run build
+```
+
+The backend development server runs with **tsx** and starts the Express application from **server/src/server.ts**.
+
+The backend currently exposes a health-check endpoint:
+
+```code
+GET /health
+```
+
+A successful response is:
+
+```code
+{
+  "status": "ok"
+}
+```
+
 ## Testing
 
 CiteSniff uses automated tests to protect important domain behavior.
@@ -374,18 +400,20 @@ CiteSniff is developed around the following principles:
 
 CiteSniff is currently under active development.
 
-The repository foundation and frontend application have been initialized.
+The repository foundation, frontend and backend application have been initialized.
 
 Current development work includes:
 
 Frontend foundation.
-Development tooling.
+Frontend development tooling.
 Code formatting.
 Linting.
 Automated testing.
 Initial evidence-verification domain logic.
-
-The backend has not yet been initialized.
+Backend TypeScript and Express foundation.
+Backend development runtime.
+Backend architecture documentation.
+Backend runtime validation.
 
 The project is being built incrementally, with each development stage documented through technical decisions, implementation notes, tests, and Git commits.
 
@@ -401,9 +429,9 @@ The project is being built incrementally, with each development stage documented
 - [✔] Code formatting
 - [✔] Frontend testing infrastructure
 - [✔] Initial evidence verification logic
-- [ ] Backend initialization
+- [✔] Backend initialization
 - [ ] Backend Development tooling
-- [ ] Architecture documentation
+- [✔] Architecture documentation
 
 ### Source Processing
 
