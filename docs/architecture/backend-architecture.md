@@ -13,10 +13,17 @@ The architecture is intentionally kept small at the current stage. New layers an
 ```text
 server/
 ├── src/
+│   ├── domain/
+│   │   └── analysis/
+│   │       └── verifyQuote.ts
 │   ├── routes/
 │   │   └── health.ts
 │   ├── app.ts
 │   └── server.ts
+├── tests/
+│   └── unit/
+│       └── analysis/
+│           └── verifyQuote.test.ts
 ├── eslint.config.js
 ├── package.json
 ├── package-lock.json
@@ -129,18 +136,26 @@ Reference generation.
 
 These services will be introduced when the corresponding functionality is implemented.
 
-### Domain Logic
+## Domain Logic
 
-Domain logic represents rules that are central to CiteSniff's behavior.
+The backend currently contains an initial quote verification function:
 
-Examples include:
+`src/domain/analysis/verifyQuote.ts`
 
-Evidence verification.
-Quote length validation.
-Source traceability rules.
-Reliability constraints.
+The function checks two conditions:
 
-Domain logic should remain independently testable and should not depend directly on Express.
+- The quotation contains between five and fifty words.
+- The quotation exists exactly within the supplied source text.
+
+The function is independent of Express and can be tested without starting the HTTP server.
+
+Its unit tests are located in:
+
+`tests/unit/analysis/verifyQuote.test.ts`
+
+The current implementation does not normalize whitespace or extract content from PDF documents or websites.
+
+No evidence verification API endpoint has been implemented yet.
 
 ### Data Layer
 
@@ -156,22 +171,17 @@ The data layer has not yet been implemented.
 
 ## Current Architecture Boundary
 
-The current implementation establishes the following boundary:
+The current implementation includes:
 
-```text
-React Client
-     │
-     │ HTTP
-     ▼
-Express Application
-     │
-     ▼
-Health Route
-```
+- An Express application and health-check route.
+- A domain-level quote verification function.
+- Unit tests for the quote verification function.
 
-Application, domain, and data layers are architectural direction rather than implemented functionality.
+The health-check endpoint is the only implemented HTTP endpoint described by the current architecture.
 
-The backend will be extended as concrete responsibilities are introduced.
+Quote verification is implemented as a domain function, but it is not yet exposed through an API endpoint or connected to a source-processing workflow.
+
+Application services, source processing, evidence retrieval, persistence, and citation generation remain future capabilities.
 
 ## Long-Running Processing
 
@@ -215,13 +225,13 @@ npm run format
 
 ## Testing Strategy
 
-The Express application should remain independently importable so that HTTP-level tests can exercise the application without requiring the server process to bind to a network port.
+The backend uses Vitest for automated tests.
 
-Business rules should be tested independently from Express whenever possible.
+Domain-level tests are located under `tests/unit/` and can validate business rules independently from Express.
 
-Vitest is configured as the backend testing framework.
+The current quote verification tests cover exact source inclusion and the five-to-fifty-word constraint.
 
-The current backend has been validated at runtime through the **/health** endpoint.
+HTTP-level tests can be introduced as API endpoints. The Express application remains independent, so these tests can run without requiring the production server entry point to bind to a network port.
 
 ## Current Status
 
@@ -234,6 +244,10 @@ Implemented:
 - TypeScript configuration.
 
 - ESM module configuration.
+
+- Backend domain module for quote verification.
+
+- Four unit tests for the verification rules.
 
 - Development execution with tsx.
 
@@ -257,8 +271,6 @@ Not yet implemented:
 
 - Application services.
 
-- Backend domain modules.
-
 - Repositories.
 
 - PostgreSQL integration.
@@ -269,6 +281,6 @@ Not yet implemented:
 
 - Evidence retrieval.
 
-- Authentication.
+- Authentication and a quote-verification API endpoint.
 
 The architecture will evolve incrementally as these responsibilities become necessary.

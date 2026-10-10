@@ -6,7 +6,7 @@ After establishing the frontend foundation and the initial evidence verification
 
 The goal was not to build application features yet. The goal was to create a small, executable backend that could later support source processing, evidence retrieval, evidence verification, and citation generation.
 
-The backend was initialized as a separate application from the frontend.
+The frontend and backend remain independent applications within the same Git repository.
 
 ## Backend Stack
 
@@ -20,33 +20,28 @@ TypeScript
 tsx for development execution
 ```
 
-The backend is maintained independently from the React client. It has its own **package.json**, dependencies, TypeScript configuration, and development scripts.
+The backend maintains its own **package.json**, **package-lock.json**, dependencies, TypeScript configuration, and development scripts.
 
 ## Initial Structure
 
-The first backend structure was intentionally small:
+The backend started:
 
 ```text
 server/
-├── src/
-│   ├── app.ts
-│   └── server.ts
-├── package.json
-├── package-lock.json
-└── tsconfig.json
+└── src/
+    ├── app.ts
+    └── server.ts
 ```
 
-No additional directories were created at this stage.
+This structure established the initial separation between Express application configuration and HTTP server startup.
 
-The intention is to introduce new architectural layers only when an actual responsibility requires them.
+As the project evolved, the backend gained a health route and its first domain module. The current structure is documented in docs/architecture/backend-architecture.md.
 
 ## TypeScript and Node Configuration
 
-The backend uses a dedicated TypeScript configuration rather than sharing the frontend configuration.
+The backend uses a dedicated TypeScript configuration based on **NodeNext** module resolution.
 
-The configuration targets Node.js 20+ and uses Node's ESM module model through **NodeNext**.
-
-The configuration also enables strict type checking and additional safety options such as:
+The configuration enables strict type checking and additional safety options, including:
 
 **strict**
 **noUncheckedIndexedAccess**
@@ -54,9 +49,9 @@ The configuration also enables strict type checking and additional safety option
 **verbatimModuleSyntax**
 **isolatedModules**
 
-The reasoning behind this configuration is documented separately in:
+The backend package declares **"type"**: **"module"** so that Node.js and TypeScript handle the source files consistently as ECMAScript modules.
 
-**docs/decisions/use-typescript-node-configuration.md**
+The reasoning behind this configuration is documented separately in: **docs/decisions/use-typescript-node-configuration.md**
 
 ## A Configuration Problem
 
@@ -252,4 +247,4 @@ Citation
 
 Additional backend layers will be introduced only when they are needed to implement those responsibilities.
 
-This keeps the architecture incremental and prevents the project from accumulating empty empty folders before their purpose is clear.
+This keeps the architecture incremental and prevents the project from accumulating empty folders before their purpose is clear.
