@@ -12,6 +12,16 @@ describe("verifyQuote", () => {
     expect(verifyQuote(sourceText, quote)).toBe(true);
   });
 
+  it("accepts a quotation when whitespace differs", () => {
+    const sourceText =
+      "Constructivist learning emphasizes\n the active   participation of learners in building knowledge.";
+
+    const quote =
+      "Constructivist learning emphasizes the active participation of learners";
+
+    expect(verifyQuote(sourceText, quote)).toBe(true);
+  });
+
   it("rejects a quotation that does not exist in the source", () => {
     const sourceText =
       "Constructivist learning emphasizes the active participation of learners in building knowledge.";
@@ -24,7 +34,6 @@ describe("verifyQuote", () => {
 
   it("rejects quotations shorter than five words", () => {
     const sourceText = "Evidence must be traceable to the original source.";
-
     const quote = "Evidence must be traceable";
 
     expect(verifyQuote(sourceText, quote)).toBe(false);
@@ -32,8 +41,15 @@ describe("verifyQuote", () => {
 
   it("rejects quotations longer than fifty words", () => {
     const sourceText = "A ".repeat(60);
-
     const quote = "A ".repeat(51);
+
+    expect(verifyQuote(sourceText, quote)).toBe(false);
+  });
+
+  it("does not ignore punctuation differences", () => {
+    const sourceText = "Evidence must remain traceable to the original source.";
+
+    const quote = "Evidence must remain traceable, to the original source.";
 
     expect(verifyQuote(sourceText, quote)).toBe(false);
   });
