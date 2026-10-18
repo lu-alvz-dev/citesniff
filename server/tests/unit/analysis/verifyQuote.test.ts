@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { verifyQuote } from "../../../src/domain/analysis/verifyQuote";
+import { verifyQuote } from "../../../src/domain/analysis/verifyQuote.js";
 
 describe("verifyQuote", () => {
   it("accepts an exact quotation that exists in the source", () => {
