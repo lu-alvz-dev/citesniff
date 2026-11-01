@@ -1,5 +1,10 @@
 import { Router } from "express";
 import multer from "multer";
+import { sourceUrlSchema } from "../schemas/sourceUrl.js";
+import {
+  downloadPdfFromUrl,
+  PdfDownloadError,
+} from "../services/sourceProcessing/downloadPdfFromUrl.js";
 import { extractPdfText } from "../services/sourceProcessing/extractPdfText.js";
 
 const sourcesRouter = Router();
@@ -73,6 +78,50 @@ sourcesRouter.post("/api/sources/pdf", receivePdf, async (req, res) => {
   } catch {
     return res.status(422).json({
       error: "Could not extract text from the uploaded PDF",
+    });
+  }
+});
+
+sourcesRouter.post("/api/sources/url", async (req, res) => {
+  const validation = sourceUrlSchema.safeParse(req.body);
+
+  if (!validation.success) {
+    return res.status(400).json({
+      error: "A valid HTTP or HTTPS source URL is required",
+    });
+  }
+
+  const { url } = validation.data;
+
+  try {
+    const pdfData = await downloadPdfFromUrl(url);
+    const pages = await extractPdfText(pdfData);
+
+    return res.status(200).json({
+      sourceUrl: url,
+      pageCount: pages.length,
+      pages,
+    });
+  } catch (error) {
+    if (error instanceof PdfDownloadError) {
+      const statusByCode = {
+        INVALID_URL: 400,
+        UNSAFE_ADDRESS: 400,
+        TOO_MANY_REDIRECTS: 502,
+        DOWNLOAD_TOO_LARGE: 413,
+        INVALID_PDF: 422,
+        UPSTREAM_ERROR: 502,
+        DOWNLOAD_TIMEOUT: 504,
+      } as const;
+
+      return res.status(statusByCode[error.code]).json({
+        error: error.message,
+        code: error.code,
+      });
+    }
+
+    return res.status(422).json({
+      error: "Could not extract text from the PDF source",
     });
   }
 });
